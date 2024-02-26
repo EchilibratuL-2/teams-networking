@@ -19,10 +19,10 @@ function createTeamRequest() {
 
 function getTeamAsHTML(team) {
   return `<tr>
-  <td>${team.promotion}won15</td>
+  <td>${team.promotion}</td>
   <td>${team.members}</td>
-  <td>${team.name}Teams</td>
-  <td>${team.url}github</td>
+  <td>${team.name}</td>
+  <td>${team.url}</td>
   <td>x</td>
 </tr>`;
 }
