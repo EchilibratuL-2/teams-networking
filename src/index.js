@@ -2,10 +2,25 @@ import "./style.css";
 
 console.info("app ready");
 
+function createTeamRequest() {
+  fetch("http://localhost:3000/teams-json/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      promotion: "WON3",
+      members: "Your Name",
+      name: "CV",
+      url: "https://github.com/nmatei/teams-networking"
+    })
+  });
+}
+
 function getTeamAsHTML(team) {
   return `<tr>
   <td>${team.promotion}won15</td>
-  <td>${team.members}Noi</td>
+  <td>${team.members}</td>
   <td>${team.name}Teams</td>
   <td>${team.url}github</td>
   <td>x</td>
@@ -17,7 +32,7 @@ function renderTeams(teams) {
   const teamsHTML = teams.map(getTeamAsHTML);
   // console.info(teamsHTML);
 
-  document.querySelector('#teamsTable tbody').innerHTML = teamsHTML.join("");
+  document.querySelector("#teamsTable tbody").innerHTML = teamsHTML.join("");
 }
 
 function loadTeams() {
@@ -30,4 +45,16 @@ function loadTeams() {
   // console.warn("loadTeams", promise);
 }
 
+function onsubmit(e) {
+  e.preventDefault();
+  console.warn("pls save all values");
+  createTeamRequest();
+  window.location.reload();
+}
+
+function initEvents() {
+  document.querySelector("#teamsForm").addEventListener("submit", onsubmit);
+}
+
+initEvents();
 loadTeams();
