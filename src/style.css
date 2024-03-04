@@ -29,6 +29,7 @@ header {
 
 section {
   flex: 1;
+  padding: 15px;
 }
 
 #teamsTable {
