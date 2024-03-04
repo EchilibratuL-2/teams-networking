@@ -1,5 +1,9 @@
 import "./style.css";
 
+function $(selector) {
+  return document.querySelector(selector);
+}
+
 function createTeamRequest(team) {
   fetch("http://localhost:3000/teams-json/create", {
     method: "POST",
@@ -12,12 +16,12 @@ function createTeamRequest(team) {
 
 function getTeamAsHTML(team) {
   return `<tr>
-  <td>${team.promotion}</td>
-  <td>${team.members}</td>
-  <td>${team.name}</td>
-  <td>${team.url}</td>
-  <td>x</td>
-</tr>`;
+    <td>${team.promotion}</td>
+    <td>${team.members}</td>
+    <td>${team.name}</td>
+    <td>${team.url}</td>
+    <td>x</td>
+  </tr>`;
 }
 
 function renderTeams(teams) {
@@ -37,20 +41,16 @@ function loadTeams() {
     });
 }
 
-function $(selector) {
-  return document.querySelector(selector);
-}
-
 function getFormValues() {
   return {
     promotion: $("input[name=promotion]").value,
     members: $("input[name=members]").value,
     name: $("input[name=name]").value,
-    url: $("input[name=url] ")[0].value
+    url: $("input[name=url]").value
   };
 }
 
-function onsubmit(e) {
+function onSubmit(e) {
   e.preventDefault();
   let team = getFormValues();
   createTeamRequest(team);
@@ -58,7 +58,7 @@ function onsubmit(e) {
 }
 
 function initEvents() {
-  $("#teamsForm").addEventListener("submit", onsubmit);
+  $("#teamsForm").addEventListener("submit", onSubmit);
 }
 
 initEvents();
