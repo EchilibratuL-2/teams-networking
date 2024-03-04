@@ -1,8 +1,6 @@
 import "./style.css";
 
-console.info("app ready");
-
-function createTeamRequest() {
+function createTeamRequest(team) {
   fetch("http://localhost:3000/teams-json/create", {
     method: "POST",
     headers: {
@@ -27,7 +25,7 @@ function renderTeams(teams) {
   const teamsHTML = teams.map(getTeamAsHTML);
   // console.info(teamsHTML);
 
-  document.querySelector("#teamsTable tbody").innerHTML = teamsHTML.join("");
+  $("#teamsTable tbody").innerHTML = teamsHTML.join("");
 }
 
 function loadTeams() {
@@ -37,16 +35,19 @@ function loadTeams() {
       renderTeams(teams);
       return teams;
     });
-  // console.warn("loadTeams", promise);
+}
+
+function $(selector) {
+  return document.querySelector(selector);
 }
 
 function getFormValues() {
   return {
-    promotion: "WON3",
-    members: "Your Name",
-    name: "CV",
-    url: "https://github.com/nmatei/teams-networking"
-  }
+    promotion: $("input[name=promotion]").value,
+    members: $("input[name=members]").value,
+    name: $("input[name=name]").value,
+    url: $("input[name=url] ")[0].value
+  };
 }
 
 function onsubmit(e) {
@@ -57,7 +58,7 @@ function onsubmit(e) {
 }
 
 function initEvents() {
-  document.querySelector("#teamsForm").addEventListener("submit", onsubmit);
+  $("#teamsForm").addEventListener("submit", onsubmit);
 }
 
 initEvents();
