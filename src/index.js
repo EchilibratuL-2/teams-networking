@@ -67,13 +67,20 @@ function loadTeams() {
     });
 }
 
-function getFormValues() {
+function getFormValues(team) {
   return {
-    promotion: $("input[name=promotion]").value,
-    members: $("input[name=members]").value,
-    name: $("input[name=name]").value,
-    url: $("input[name=url]").value
+  promotion: $("input[name=promotion]").value,
+  members: $("input[name=members]").value,
+  name: $("input[name=name]").value,
+  url: $("input[name=url]").value,
   };
+}
+
+function setFormValues(team) {
+  $("input[name=promotion]").value = team.promotion;
+  $("input[name=members]").value = team.members;
+  $("input[name=name]").value = team.name;
+  $("input[name=url]").value = team.url;
 }
 
 function onSubmit(e) {
@@ -87,7 +94,7 @@ function startEdit(id) {
   const team = allTeams.find(team => {
     return id === team.id;
   });
-  console.warn("click on edit %o", id, team);
+  setFormValues(team);
 }
 
 function initEvents() {
@@ -98,6 +105,7 @@ function initEvents() {
       deleteTeamRequest(id);
       window.location.reload();
     } else if (e.target.matches("a.edit-btn")) {
+      e.preventDefault();
       //const id = e.target.getAttribute("data-id");
       const id = e.target.dataset.id;
       startEdit(id);
