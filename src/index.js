@@ -1,3 +1,11 @@
+import "./style.css";
+
+let allTeams = [];
+let editId;
+
+function $(selector) {
+  return document.querySelector(selector);
+}
 
 function createTeamRequest(team) {
   fetch("http://localhost:3000/teams-json/create", {
