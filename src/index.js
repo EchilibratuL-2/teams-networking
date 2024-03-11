@@ -1,10 +1,3 @@
-import "./style.css";
-
-let allTeams = [];
-
-function $(selector) {
-  return document.querySelector(selector);
-}
 
 function createTeamRequest(team) {
   fetch("http://localhost:3000/teams-json/create", {
@@ -67,12 +60,12 @@ function loadTeams() {
     });
 }
 
-function getFormValues(team) {
+function getFormValues() {
   return {
-  promotion: $("input[name=promotion]").value,
-  members: $("input[name=members]").value,
-  name: $("input[name=name]").value,
-  url: $("input[name=url]").value,
+    promotion: $("input[name=promotion]").value,
+    members: $("input[name=members]").value,
+    name: $("input[name=name]").value,
+    url: $("input[name=url]").value
   };
 }
 
@@ -86,11 +79,17 @@ function setFormValues(team) {
 function onSubmit(e) {
   e.preventDefault();
   let team = getFormValues();
-  createTeamRequest(team);
+  if (editId) {
+    team.id = editId;
+    updateTeamRequest(team);
+  } else {
+    createTeamRequest(team);
+  }
   window.location.reload();
 }
 
 function startEdit(id) {
+  editId = id;
   const team = allTeams.find(team => {
     return id === team.id;
   });
