@@ -37,6 +37,11 @@ section {
   width: 100%;
 }
 
+#teamsTable tfoot input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 #teamsTable th,
 #teamsTable td {
   border: 1px solid #057988;
