@@ -93,11 +93,17 @@ function onSubmit(e) {
     const response = req.then(r => r.json());
     response.then(status => {
       if (status.succes) {
-      window.location.reload();
+        window.location.reload();
       }
     });
   } else {
     createTeamRequest(team);
+    const req = createTeamRequest(team);
+    const response = req.then(r => r.json())
+    response.then(status=> {
+      if (status.succes)
+    })
+    window.location.reload();
   }
   // 
 }
